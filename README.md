@@ -31,3 +31,27 @@ You can also install a lightweight Desktop on Jetson and connect to it with Remo
 Then, you can connect to the Jetson Nano with Remote Desktop Connection.
 
 You may need a VPN connection to install updates from nvidia (I used a Cisco Anyconnect VPN).
+
+## CUDA Installation
+Confirm that the Nvidia CUDA Compiler (nvcc) is installed and the correct path is sourced. The JetPack comes preinstalled with the compiler. Add the appropriate paths to the compiler in the bash file to run the compiler via the command line. The output should mention the current version of the compiler.
+```
+// Open the ~/.bashrc file
+~$ sudo gedit ~/.bashrc
+// Append these two lines to the file
+export PATH=${PATH}:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+// Source the file
+~$ source ~/.bashrc
+// Confirm the compiler version
+~$ nvcc --version
+```
+The output of `nvcc --version` is:
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2021 NVIDIA Corporation
+Built on Sun_Feb_28_22:34:44_PST_2021
+Cuda compilation tools, release 10.2, V10.2.300
+Build cuda_10.2_r440.TC440_70.29663091_0
+```
+## OpenCL Installation
+Follow the instructions on [Build and Install OpenCL on Jetson Nano](https://yunusmuhammad007.medium.com/build-and-install-opencl-on-jetson-nano-10bf4a7f0e65) to build PoCL 1.7 with CUDA backend enable on Jetson Nano.
